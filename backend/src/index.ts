@@ -37,8 +37,12 @@ app.get("/api/health", (req, res) => {
   res.status(200).json({ status: "API is running" });
 });
 
-const PORT = process.env.PORT || 5000;
+// Only listen when running locally (not on Vercel)
+if (!process.env.VERCEL) {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`Server running in ${process.env.NODE_ENV || "development"} mode on port ${PORT}`);
+  });
+}
 
-app.listen(PORT, () => {
-  console.log(`Server running in ${process.env.NODE_ENV || "development"} mode on port ${PORT}`);
-});
+export default app;
