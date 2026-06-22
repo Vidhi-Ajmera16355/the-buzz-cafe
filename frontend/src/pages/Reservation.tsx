@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
+import { API_BASE_URL } from "../config";
 
 export default function Reservation() {
   const [formData, setFormData] = useState({
@@ -18,7 +19,7 @@ export default function Reservation() {
     e.preventDefault();
     setStatus("loading");
     try {
-      await axios.post("http://localhost:5000/api/reservations", formData);
+      await axios.post(`${API_BASE_URL}/reservations`, formData);
       setStatus("success");
     } catch (error) {
       console.error(error);

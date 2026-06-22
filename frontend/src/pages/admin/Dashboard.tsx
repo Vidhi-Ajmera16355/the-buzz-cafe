@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { API_BASE_URL } from "../../config";
 
 export default function Dashboard() {
   const [stats, setStats] = useState({ reservations: 0, inquiries: 0 });
@@ -10,8 +11,8 @@ export default function Dashboard() {
       const config = { headers: { Authorization: `Bearer ${token}` } };
       try {
         const [resRes, inqRes] = await Promise.all([
-          axios.get("http://localhost:5000/api/reservations", config),
-          axios.get("http://localhost:5000/api/inquiries", config)
+          axios.get(`${API_BASE_URL}/reservations`, config),
+          axios.get(`${API_BASE_URL}/inquiries`, config)
         ]);
         setStats({ reservations: resRes.data.length, inquiries: inqRes.data.length });
       } catch (error) {

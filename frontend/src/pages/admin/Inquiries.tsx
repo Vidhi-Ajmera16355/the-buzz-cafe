@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { API_BASE_URL } from "../../config";
 
-const API = "http://localhost:5000/api";
+const API = API_BASE_URL;
 
 type Inquiry = {
   _id: string;
