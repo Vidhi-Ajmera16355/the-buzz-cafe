@@ -33,6 +33,10 @@ app.use("/api/reservations", reservationRoutes);
 app.use("/api/inquiries", inquiryRoutes);
 app.use("/api/menu", menuRoutes);
 
+app.get("/", (req, res) => {
+  res.status(200).json({ status: "The Buzz Cafe API is running 🐝" });
+});
+
 app.get("/api/health", (req, res) => {
   res.status(200).json({ status: "API is running" });
 });
