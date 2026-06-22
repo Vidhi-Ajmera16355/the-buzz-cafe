@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Buzz Cafe | Palam, Delhi NCR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --honey: #E8A93C;
+  --honey-deep: #C97E1B;
+  --coffee: #2B1B12;
+  --coffee-soft: #4A3326;
+  --cream: #FBF3E3;
+  --cream-2: #F4E6CB;
+  --ink: #1E140C;
+  --line: rgba(43,27,18,0.14);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Manrope',sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  overflow-x:hidden;
+}
+h1,h2,h3,.display{font-family:'Fraunces',serif;}
+a{text-decoration:none;color:inherit;}
+img{max-width:100%;display:block;}
+.container{max-width:1180px;margin:0 auto;padding:0 28px;}
+
+/* honeycomb texture backdrop */
+.hex-field{
+  position:absolute; inset:0; pointer-events:none; opacity:.5;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(232,169,60,.18) 0, transparent 45%),
+    radial-gradient(circle at 80% 70%, rgba(201,126,27,.15) 0, transparent 50%);
+}
+
+/* ===== NAV ===== */
+header{
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  background:rgba(251,243,227,0); backdrop-filter:blur(0px);
+  transition:all .4s ease;
+  padding:22px 0;
+}
+header.scrolled{
+  background:rgba(251,243,227,0.92);
+  backdrop-filter:blur(10px);
+  padding:14px 0;
+  box-shadow:0 4px 24px rgba(43,27,18,0.06);
+}
+nav{display:flex; align-items:center; justify-content:space-between;}
+.logo{
+  display:flex; align-items:center; gap:10px;
+  font-family:'Fraunces',serif; font-weight:700; font-size:1.35rem;
+  color:var(--coffee);
+  letter-spacing:.2px;
+}
+.logo .dot{
+  width:11px;height:11px;border-radius:50%;background:var(--honey);
+  box-shadow:0 0 0 0 rgba(232,169,60,.6);
+  animation:buzz-pulse 2.2s infinite;
+}
+@keyframes buzz-pulse{
+  0%{box-shadow:0 0 0 0 rgba(232,169,60,.55);}
+  70%{box-shadow:0 0 0 10px rgba(232,169,60,0);}
+  100%{box-shadow:0 0 0 0 rgba(232,169,60,0);}
+}
+.nav-links{display:flex; gap:36px; font-weight:600; font-size:.93rem;}
+.nav-links a{position:relative; padding:4px 0; color:var(--coffee-soft);}
+.nav-links a::after{
+  content:''; position:absolute; left:0; bottom:0; height:2px; width:0;
+  background:var(--honey-deep); transition:width .3s ease;
+}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{
+  background:var(--coffee); color:var(--cream); padding:11px 22px;
+  border-radius:30px; font-weight:700; font-size:.88rem;
+  transition:transform .25s ease, background .25s ease;
+}
+.nav-cta:hover{background:var(--honey-deep); transform:translateY(-2px);}
+.burger{display:none; flex-direction:column; gap:5px; cursor:pointer;}
+.burger span{width:24px; height:2px; background:var(--coffee);}
+
+/* ===== HERO ===== */
+.hero{
+  position:relative; min-height:100vh; display:flex; align-items:center;
+  padding:140px 0 80px;
+  background:
+    radial-gradient(ellipse 900px 600px at 85% 15%, rgba(232,169,60,.25), transparent 60%),
+    linear-gradient(180deg, #FBF3E3 0%, #F6E8CC 100%);
+  overflow:hidden;
+}
+.hero-grid{
+  display:grid; grid-template-columns:1.05fr .95fr; gap:50px; align-items:center;
+  position:relative; z-index:2;
+}
+.eyebrow{
+  display:inline-flex; align-items:center; gap:8px;
+  font-weight:700; font-size:.78rem; letter-spacing:1.6px; text-transform:uppercase;
+  color:var(--honey-deep); margin-bottom:22px;
+}
+.eyebrow::before{content:'';width:26px;height:1px;background:var(--honey-deep);}
+.hero h1{
+  font-size:clamp(2.6rem, 5.4vw, 4.6rem);
+  line-height:1.02; font-weight:700; color:var(--coffee);
+  letter-spacing:-1px;
+}
+.hero h1 em{
+  font-style:italic; font-weight:500; color:var(--honey-deep);
+  position:relative;
+}
+.hero p.lede{
+  margin-top:24px; font-size:1.12rem; line-height:1.7; color:var(--coffee-soft);
+  max-width:480px;
+}
+.hero-actions{display:flex; gap:16px; margin-top:38px; flex-wrap:wrap;}
+.btn-primary{
+  background:var(--coffee); color:var(--cream); padding:16px 30px; border-radius:40px;
+  font-weight:700; font-size:.95rem; display:inline-flex; align-items:center; gap:10px;
+  transition:transform .3s ease, box-shadow .3s ease;
+  box-shadow:0 10px 30px -10px rgba(43,27,18,.45);
+}
+.btn-primary:hover{transform:translateY(-3px); box-shadow:0 16px 34px -10px rgba(43,27,18,.5);}
+.btn-secondary{
+  border:1.5px solid var(--coffee); color:var(--coffee); padding:16px 30px; border-radius:40px;
+  font-weight:700; font-size:.95rem; transition:all .3s ease;
+}
+.btn-secondary:hover{background:var(--coffee); color:var(--cream);}
+.hero-stats{display:flex; gap:34px; margin-top:54px;}
+.hero-stats div strong{
+  display:block; font-family:'Fraunces',serif; font-size:1.9rem; color:var(--coffee); font-weight:700;
+}
+.hero-stats div span{font-size:.8rem; color:var(--coffee-soft); font-weight:600;}
+
+/* hero visual: stacked hex photos */
+.hero-visual{position:relative; height:520px;}
+.hexagon{
+  position:absolute;
+  clip-path:polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  overflow:hidden;
+  box-shadow:0 30px 60px -20px rgba(43,27,18,.4);
+  transition:transform .5s ease;
+}
+.hexagon img{width:100%; height:100%; object-fit:cover;}
+.hexagon:hover{transform:scale(1.04) translateY(-4px);}
+.hex-1{width:300px; height:340px; top:0; right:60px; z-index:3; animation:float1 6s ease-in-out infinite;}
+.hex-2{width:230px; height:260px; top:230px; right:280px; z-index:2; animation:float2 7s ease-in-out infinite;}
+.hex-3{width:190px; height:215px; top:30px; right:330px; z-index:1; opacity:.9; animation:float3 8s ease-in-out infinite;}
+@keyframes float1{0%,100%{transform:translateY(0);}50%{transform:translateY(-14px);}}
+@keyframes float2{0%,100%{transform:translateY(0);}50%{transform:translateY(12px);}}
+@keyframes float3{0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}
+
+.scroll-cue{
+  position:absolute; bottom:34px; left:28px; display:flex; align-items:center; gap:10px;
+  font-size:.75rem; font-weight:700; letter-spacing:1px; color:var(--coffee-soft); text-transform:uppercase;
+}
+.scroll-line{width:1px; height:38px; background:var(--coffee-soft); position:relative; overflow:hidden;}
+.scroll-line::after{
+  content:''; position:absolute; top:-100%; left:0; width:100%; height:100%; background:var(--honey-deep);
+  animation:scrolldown 1.8s infinite;
+}
+@keyframes scrolldown{0%{top:-100%;}100%{top:100%;}}
+
+/* ===== REVEAL ON SCROLL ===== */
+.reveal{opacity:0; transform:translateY(36px); transition:opacity .8s ease, transform .8s ease;}
+.reveal.in{opacity:1; transform:translateY(0);}
+
+/* ===== SECTION HEADERS ===== */
+.section{padding:120px 0;}
+.section-head{max-width:620px; margin-bottom:60px;}
+.section-head .eyebrow{margin-bottom:14px;}
+.section-head h2{font-size:clamp(2rem,3.6vw,3rem); color:var(--coffee); font-weight:700; line-height:1.08;}
+.section-head p{margin-top:18px; color:var(--coffee-soft); font-size:1.05rem; line-height:1.7;}
+
+/* ===== ABOUT ===== */
+.about{background:var(--coffee); color:var(--cream); position:relative;}
+.about .hex-field{opacity:.08;}
+.about .section-head h2{color:var(--cream);}
+.about .section-head p{color:rgba(251,243,227,.72);}
+.about-grid{display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;}
+.about-photo{position:relative; border-radius:20px; overflow:hidden; aspect-ratio:4/5;}
+.about-photo img{width:100%; height:100%; object-fit:cover;}
+.honey-ring{
+  position:absolute; width:220px; height:220px; border:1.5px dashed rgba(232,169,60,.5);
+  border-radius:50%; top:-50px; right:-50px; animation:spin 30s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+.about-points{display:flex; flex-direction:column; gap:30px; margin-top:10px;}
+.about-point{display:flex; gap:20px;}
+.about-point .num{
+  font-family:'Fraunces',serif; font-size:1.6rem; color:var(--honey); font-weight:700; flex-shrink:0;
+}
+.about-point h4{font-size:1.05rem; margin-bottom:6px; font-weight:700;}
+.about-point p{color:rgba(251,243,227,.66); font-size:.93rem; line-height:1.6;}
+
+/* ===== MENU ===== */
+.menu-tabs{display:flex; gap:10px; margin-bottom:50px; flex-wrap:wrap;}
+.menu-tab{
+  padding:10px 22px; border-radius:30px; border:1.5px solid var(--line); font-weight:700; font-size:.85rem;
+  color:var(--coffee-soft); cursor:pointer; transition:all .3s ease; background:transparent;
+}
+.menu-tab.active, .menu-tab:hover{background:var(--coffee); color:var(--cream); border-color:var(--coffee);}
+.menu-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:30px;}
+.menu-panel{display:none;}
+.menu-panel.active{display:grid; grid-template-columns:repeat(3,1fr); gap:30px;}
+.dish-card{
+  background:#fff; border-radius:18px; overflow:hidden; border:1px solid var(--line);
+  transition:transform .4s ease, box-shadow .4s ease; position:relative;
+}
+.dish-card:hover{transform:translateY(-8px); box-shadow:0 28px 50px -22px rgba(43,27,18,.3);}
+.dish-img{aspect-ratio:4/3; overflow:hidden;}
+.dish-img img{width:100%; height:100%; object-fit:cover; transition:transform .6s ease;}
+.dish-card:hover .dish-img img{transform:scale(1.08);}
+.dish-info{padding:20px 22px 24px;}
+.dish-info .row{display:flex; justify-content:space-between; align-items:baseline; gap:10px;}
+.dish-info h4{font-family:'Fraunces',serif; font-size:1.15rem; font-weight:600; color:var(--coffee);}
+.dish-info .price{font-weight:800; color:var(--honey-deep); font-size:1.05rem; white-space:nowrap;}
+.dish-info p{margin-top:8px; font-size:.86rem; color:var(--coffee-soft); line-height:1.55;}
+.tag{
+  display:inline-block; margin-top:12px; font-size:.68rem; font-weight:800; letter-spacing:.6px;
+  text-transform:uppercase; color:var(--honey-deep); background:rgba(232,169,60,.12); padding:4px 10px; border-radius:20px;
+}
+
+/* ===== GALLERY / 360 ===== */
+.gallery-section{background:var(--cream-2);}
+.view360{
+  position:relative; border-radius:24px; overflow:hidden; aspect-ratio:16/7; margin-bottom:60px;
+  box-shadow:0 30px 60px -25px rgba(43,27,18,.35);
+}
+.view360 img{width:100%; height:100%; object-fit:cover; filter:saturate(1.05);}
+.view360-overlay{
+  position:absolute; inset:0; background:linear-gradient(90deg, rgba(43,27,18,.55), rgba(43,27,18,.05) 55%);
+  display:flex; flex-direction:column; justify-content:center; padding:50px;
+}
+.view360-overlay .badge{
+  display:inline-flex; align-items:center; gap:8px; background:rgba(251,243,227,.15);
+  border:1px solid rgba(251,243,227,.4); color:#fff; padding:8px 16px; border-radius:30px;
+  font-size:.78rem; font-weight:700; width:fit-content; backdrop-filter:blur(6px); margin-bottom:16px;
+}
+.badge .ring{width:8px;height:8px;border-radius:50%; background:var(--honey); animation:buzz-pulse 2s infinite;}
+.view360-overlay h3{color:#fff; font-size:1.8rem; max-width:420px; line-height:1.2;}
+.view360-overlay p{color:rgba(255,255,255,.8); margin-top:10px; max-width:380px; font-size:.95rem;}
+
+.gallery-grid{display:grid; grid-template-columns:repeat(4, 1fr); grid-auto-rows:160px; gap:18px;}
+.gallery-grid img{width:100%; height:100%; object-fit:cover; border-radius:16px; transition:transform .5s ease, filter .5s ease;}
+.gallery-grid .g1{grid-column:span 2; grid-row:span 2;}
+.gallery-grid .g4{grid-column:span 2;}
+.gallery-grid div{border-radius:16px; overflow:hidden; cursor:pointer;}
+.gallery-grid div:hover img{transform:scale(1.1);}
+
+/* ===== TESTIMONIALS ===== */
+.testimonials{position:relative;}
+.t-track{display:flex; gap:26px; overflow-x:auto; padding-bottom:20px; scroll-snap-type:x mandatory;}
+.t-track::-webkit-scrollbar{height:5px;}
+.t-track::-webkit-scrollbar-thumb{background:var(--honey); border-radius:10px;}
+.t-card{
+  min-width:340px; scroll-snap-align:start; background:#fff; border:1px solid var(--line); border-radius:20px;
+  padding:32px; position:relative;
+}
+.t-card .stars{color:var(--honey-deep); font-size:1rem; letter-spacing:2px; margin-bottom:16px;}
+.t-card p{font-size:.97rem; line-height:1.7; color:var(--coffee-soft);}
+.t-foot{display:flex; align-items:center; gap:12px; margin-top:22px;}
+.t-avatar{
+  width:42px; height:42px; border-radius:50%; background:var(--honey); color:#fff; display:flex;
+  align-items:center; justify-content:center; font-weight:800; font-family:'Fraunces',serif;
+}
+.t-foot strong{display:block; font-size:.9rem; color:var(--coffee);}
+.t-foot span{font-size:.78rem; color:var(--coffee-soft);}
+
+/* ===== CTA / VISIT ===== */
+.visit{
+  background:var(--coffee); color:var(--cream); border-radius:32px; position:relative; overflow:hidden;
+  margin:0 28px; padding:70px 60px; display:grid; grid-template-columns:1.1fr .9fr; gap:50px; align-items:center;
+}
+.visit::before{
+  content:''; position:absolute; width:500px; height:500px; border-radius:50%;
+  background:radial-gradient(circle, rgba(232,169,60,.18), transparent 70%); top:-200px; right:-150px;
+}
+.visit h2{font-size:clamp(1.9rem,3.2vw,2.7rem); position:relative; z-index:1;}
+.visit p{color:rgba(251,243,227,.7); margin-top:16px; max-width:420px; position:relative; z-index:1;}
+.visit-info{display:flex; flex-direction:column; gap:22px; position:relative; z-index:1;}
+.info-row{display:flex; gap:16px; align-items:flex-start;}
+.info-icon{
+  width:44px; height:44px; border-radius:50%; background:rgba(232,169,60,.15); border:1px solid rgba(232,169,60,.4);
+  display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1.1rem;
+}
+.info-row h5{font-size:.95rem; font-weight:700; margin-bottom:4px;}
+.info-row p, .info-row a{font-size:.88rem; color:rgba(251,243,227,.7);}
+.visit .btn-primary{background:var(--honey); color:var(--coffee); margin-top:10px; box-shadow:0 10px 30px -10px rgba(232,169,60,.5);}
+.visit .btn-primary:hover{background:var(--cream);}
+
+/* ===== FOOTER ===== */
+footer{padding:60px 0 30px; text-align:center;}
+footer .logo{justify-content:center; margin-bottom:16px;}
+footer p{color:var(--coffee-soft); font-size:.85rem;}
+footer .made{margin-top:20px; font-size:.78rem; color:rgba(43,27,18,.4);}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px){
+  .nav-links, .nav-cta{display:none;}
+  .burger{display:flex;}
+  .hero-grid{grid-template-columns:1fr;}
+  .hero-visual{height:380px; margin-top:20px;}
+  .hex-1{width:220px;height:250px; right:10px;}
+  .hex-2{width:170px;height:190px; top:170px; right:160px;}
+  .hex-3{display:none;}
+  .about-grid{grid-template-columns:1fr;}
+  .menu-grid, .menu-panel.active{grid-template-columns:1fr 1fr;}
+  .gallery-grid{grid-template-columns:repeat(2,1fr); grid-auto-rows:140px;}
+  .visit{grid-template-columns:1fr; padding:44px 26px; margin:0 16px;}
+}
+@media (max-width: 560px){
+  .menu-grid, .menu-panel.active{grid-template-columns:1fr;}
+  .hero-stats{gap:22px;}
+  .container{padding:0 20px;}
+}
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="container">
+    <nav>
+      <a href="#top" class="logo"><span class="dot"></span>The Buzz Cafe</a>
+      <div class="nav-links">
+        <a href="#about">Our Story</a>
+        <a href="#menu">Menu</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#visit">Visit</a>
+      </div>
+      <a href="#visit" class="nav-cta">Reserve a Table</a>
+      <div class="burger"><span></span><span></span><span></span></div>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hex-field"></div>
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow reveal">Palam · Delhi NCR</span>
+      <h1 class="reveal">Where the day <em>buzzes</em><br>a little brighter.</h1>
+      <p class="lede reveal">Hand-pressed sandwiches, loaded shakes and slow-brewed chai in a corner of Palam that regulars now call their own. Good food, warm chairs, no rush.</p>
+      <div class="hero-actions reveal">
+        <a href="#menu" class="btn-primary">View the Menu →</a>
+        <a href="#visit" class="btn-secondary">Find Us</a>
+      </div>
+      <div class="hero-stats reveal">
+        <div><strong>4.5★</strong><span>Google Rating</span></div>
+        <div><strong>12:30PM</strong><span>Opens Daily</span></div>
+        <div><strong>100%</strong><span>Fresh Made</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hexagon hex-3"><img src="theBuzzCafe1.webp" alt="Mojito at The Buzz Cafe"></div>
+      <div class="hexagon hex-2"><img src="1782051983919_image.png" alt="Crispy chicken wrap"></div>
+      <div class="hexagon hex-1"><img src="buzzcafe6.webp" alt="Loaded chocolate shake"></div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<section class="section about" id="about">
+  <div class="hex-field"></div>
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-photo reveal">
+        <img src="theBuzzCafe3.webp" alt="Sandwich platter at The Buzz Cafe">
+        <div class="honey-ring"></div>
+      </div>
+      <div>
+        <span class="eyebrow reveal">Our Story</span>
+        <h2 class="reveal" style="font-size:clamp(1.9rem,3vw,2.6rem); margin-bottom:24px;">A small cafe that grew on word of mouth — and a 4.5★ rating.</h2>
+        <p class="reveal" style="color:rgba(251,243,227,.7); line-height:1.75; margin-bottom:36px; max-width:480px;">We never set out to be fancy. Just consistently good — the kind of place where the chai is always hot, the staff remembers your order, and there's always a seat by the window.</p>
+        <div class="about-points">
+          <div class="about-point reveal">
+            <span class="num">01</span>
+            <div><h4>Fresh, Every Single Day</h4><p>Nothing sits in the back. Sandwiches are pressed and shakes are blended only after you order.</p></div>
+          </div>
+          <div class="about-point reveal">
+            <span class="num">02</span>
+            <div><h4>A Neighbourhood Favourite</h4><p>Loved enough by Palam locals to earn one of the highest cafe ratings in the area — without ever running an ad.</p></div>
+          </div>
+          <div class="about-point reveal">
+            <span class="num">03</span>
+            <div><h4>Open Late, Open Always</h4><p>From your first coffee of the day to a late-night snack run, we're rarely closed when you need us.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="menu">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">The Menu</span>
+      <h2>Built around a few things, done very well.</h2>
+      <p>From loaded shakes to crisp wraps — these are the dishes that built our reputation, one plate at a time.</p>
+    </div>
+
+    <div class="menu-tabs reveal">
+      <button class="menu-tab active" data-tab="all">All Favourites</button>
+      <button class="menu-tab" data-tab="bites">Bites & Mains</button>
+      <button class="menu-tab" data-tab="drinks">Drinks & Shakes</button>
+    </div>
+
+    <div class="menu-panel active" data-panel="all">
+      <div class="dish-card reveal">
+        <div class="dish-img"><img src="buzzcafe6.webp" alt="Loaded chocolate shake"></div>
+        <div class="dish-info">
+          <div class="row"><h4>The Buzz Loaded Shake</h4><span class="price">₹249</span></div>
+          <p>Thick chocolate shake stacked with brownie, wafer rolls and salted caramel popcorn.</p>
+          <span class="tag">Bestseller</span>
+        </div>
+      </div>
+      <div class="dish-card reveal">
+        <div class="dish-img"><img src="cafe5.webp" alt="Crispy chicken burger"></div>
+        <div class="dish-info">
+          <div class="row"><h4>Crunch Chicken Burger</h4><span class="price">₹189</span></div>
+          <p>Double bun, hand-breaded chicken, melted cheddar, lettuce and tomato, grilled fresh.</p>
+          <span class="tag">Chef's Pick</span>
+        </div>
+      </div>
+      <div class="dish-card reveal">
+        <div class="dish-img"><img src="theBuzzCafe3.webp" alt="Grilled sandwich with fries and coke"></div>
+        <div class="dish-info">
+          <div class="row"><h4>Grilled Cheese Combo</h4><span class="price">₹179</span></div>
+          <p>Toasted grilled sandwich, golden fries and a chilled Coke — a Buzz Cafe classic combo.</p>
+          <span class="tag">Value Combo</span>
+        </div>
+      </div>
+      <div class="dish-card reveal">
+        <div class="dish-img"><img src="theBuzzCafe1.webp" alt="Virgin mojito"></div>
+        <div class="dish-info">
+          <div class="row"><h4>Sparkling Virgin Mojito</h4><span class="price">₹129</span></div>
+          <p>Fresh mint and lime over crushed ice, finished with a splash of soda.</p>
+          <span class="tag">Refreshing</span>
+        </div>
+      </div>
+      <div class="dish-card reveal">
+        <div class="dish-img"><img src="image7.png" alt="Crispy chicken wrap"></div>
+        <div class="dish-info">
+          <div class="row"><h4>Crispy Chicken Wrap</h4><span class="price">₹169</span></div>
+          <p>Crunchy chicken strips rolled with fresh veg and house mayo in a toasted tortilla.</p>
+          <span class="tag">Popular</span>
+        </div>
+      </div>
+      <div class="dish-card reveal">
+        <div class="dish-img"><img src="image.png" alt="Masala chai with cookies"></div>
+        <div class="dish-info">
+          <div class="row"><h4>Classic Masala Chai</h4><span class="price">₹49</span></div>
+          <p>Slow-brewed with whole spices, served with crunchy peanut cookies on the side.</p>
+          <span class="tag">All-Day Favourite</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-panel" data-panel="bites">
+      <div class="dish-card reveal">
+        <div class="dish-img"><img src="cafe5.webp" alt="Crispy chicken burger"></div>
+        <div class="dish-info"><div class="row"><h4>Crunch Chicken Burger</h4><span class="price">₹189</span></div><p>Double bun, hand-breaded chicken, melted cheddar, lettuce and tomato, grilled fresh.</p><span class="tag">Chef's Pick</span></div>
+      </div>
+      <div class="dish-card reveal">
+        <div class="dish-img"><img src="theBuzzCafe3.webp" alt="Grilled sandwich with fries and coke"></div>
+        <div class="dish-info"><div class="row"><h4>Grilled Cheese Combo</h4><span class="price">₹179</span></div><p>Toasted grilled sandwich, golden fries and a chilled Coke — a Buzz Cafe classic combo.</p><span class="tag">Value Combo</span></div>
+      </div>
+      <div class="dish-card reveal">
+        <div class="dish-img"><img src="image7.png" alt="Crispy chicken wrap"></div>
+        <div class="dish-info"><div class="row"><h4>Crispy Chicken Wrap</h4><span class="price">₹169</span></div><p>Crunchy chicken strips rolled with fresh veg and house mayo in a toasted tortilla.</p><span class="tag">Popular</span></div>
+      </div>
+    </div>
+
+    <div class="menu-panel" data-panel="drinks">
+      <div class="dish-card reveal">
+        <div class="dish-img"><img src="buzzcafe6.webp" alt="Loaded chocolate shake"></div>
+        <div class="dish-info"><div class="row"><h4>The Buzz Loaded Shake</h4><span class="price">₹249</span></div><p>Thick chocolate shake stacked with brownie, wafer rolls and salted caramel popcorn.</p><span class="tag">Bestseller</span></div>
+      </div>
+      <div class="dish-card reveal">
+        <div class="dish-img"><img src="theBuzzCafe1.webp" alt="Virgin mojito"></div>
+        <div class="dish-info"><div class="row"><h4>Sparkling Virgin Mojito</h4><span class="price">₹129</span></div><p>Fresh mint and lime over crushed ice, finished with a splash of soda.</p><span class="tag">Refreshing</span></div>
+      </div>
+      <div class="dish-card reveal">
+        <div class="dish-img"><img src="image.png" alt="Masala chai with cookies"></div>
+        <div class="dish-info"><div class="row"><h4>Classic Masala Chai</h4><span class="price">₹49</span></div><p>Slow-brewed with whole spices, served with crunchy peanut cookies on the side.</p><span class="tag">All-Day Favourite</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section gallery-section" id="gallery">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Step Inside</span>
+      <h2>Take a look around — before you visit.</h2>
+    </div>
+
+    <div class="view360 reveal">
+      <img src="https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=o9yUDOyy-F2uJKr8Gh0HFA&cb_client=lu.gallery.gps&w=1200&h=550&yaw=290.33817&pitch=0&thumbfov=100" alt="360 view of The Buzz Cafe" onerror="this.src='images/theBuzzCafe3.webp'">
+      <div class="view360-overlay">
+        <span class="badge"><span class="ring"></span>360° Street View</span>
+        <h3>See the cafe exactly as it is on Google Maps.</h3>
+        <p>Real photos, real space — no surprises when you walk in.</p>
+      </div>
+    </div>
+
+    <div class="gallery-grid reveal">
+      <div class="g1"><img src="buzzcafe6.webp" alt="Loaded shake"></div>
+      <div><img src="cafe5.webp" alt="Chicken burger"></div>
+      <div><img src="theBuzzCafe1.webp" alt="Mojito"></div>
+      <div class="g4"><img src="theBuzzCafe3.webp" alt="Sandwich platter"></div>
+      <div><img src="1782051983919_image.png" alt="Chicken wrap"></div>
+      <div><img src="1782052021919_image.png" alt="Chai and cookies"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="reviews">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Reviews</span>
+      <h2>What Palam has been saying.</h2>
+    </div>
+    <div class="t-track reveal">
+      <div class="t-card">
+        <div class="stars">★★★★★</div>
+        <p>"Easily the best shake in the area — the loaded chocolate one is worth the trip alone. Staff is super friendly too."</p>
+        <div class="t-foot"><div class="t-avatar">R</div><div><strong>Rohit Sharma</strong><span>Google Review</span></div></div>
+      </div>
+      <div class="t-card">
+        <div class="stars">★★★★★</div>
+        <p>"Found this place by chance and now it's my go-to weekend spot. The grilled sandwich combo is unbeatable value."</p>
+        <div class="t-foot"><div class="t-avatar">P</div><div><strong>Priya Malhotra</strong><span>Google Review</span></div></div>
+      </div>
+      <div class="t-card">
+        <div class="stars">★★★★★</div>
+        <p>"Quiet, clean, and the chai actually tastes homemade. I bring my laptop here most evenings to work."</p>
+        <div class="t-foot"><div class="t-avatar">A</div><div><strong>Aman Verma</strong><span>Google Review</span></div></div>
+      </div>
+      <div class="t-card">
+        <div class="stars">★★★★★</div>
+        <p>"Great little neighbourhood cafe — friendly owner, quick service, and the chicken wrap is genuinely great."</p>
+        <div class="t-foot"><div class="t-avatar">S</div><div><strong>Sana Khan</strong><span>Google Review</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="visit" style="padding-top:0;">
+  <div class="visit reveal">
+    <div>
+      <span class="eyebrow" style="color:var(--honey);">Come Say Hi</span>
+      <h2>Pull up a chair. <br>We'll have the chai ready.</h2>
+      <p>Open every day from late morning till late night — for breakfast meetings, lunch breaks, or a long evening with friends.</p>
+      <a href="#" class="btn-primary">Get Directions →</a>
+    </div>
+    <div class="visit-info">
+      <div class="info-row">
+        <div class="info-icon">📍</div>
+        <div><h5>Location</h5><p>The Buzz Cafe, Palam, Delhi NCR</p></div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">🕐</div>
+        <div><h5>Hours</h5><p>Daily · 10:30 AM – 11:00 PM</p></div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">📞</div>
+        <div><h5>Reservations</h5><p><a href="tel:+919990555434">+91 99905 55434</a></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <a href="#top" class="logo"><span class="dot"></span>The Buzz Cafe</a>
+    <p>Palam, Delhi NCR · Open Daily 10:30 AM – 11:00 PM</p>
+    <p class="made">Crafted with ♥ for the regulars of Palam.</p>
+  </div>
+</footer>
+
+<script>
+  // header scroll state
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', ()=>{
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:.15});
+  revealEls.forEach(el=>io.observe(el));
+
+  // menu tabs
+  const tabs = document.querySelectorAll('.menu-tab');
+  const panels = document.querySelectorAll('.menu-panel');
+  tabs.forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+      tabs.forEach(t=>t.classList.remove('active'));
+      tab.classList.add('active');
+      const target = tab.dataset.tab;
+      panels.forEach(p=> p.classList.toggle('active', p.dataset.panel===target));
+    });
+  });
+
+  // mobile burger -> simple toggle of nav links
+  const burger = document.querySelector('.burger');
+  const navLinks = document.querySelector('.nav-links');
+  burger.addEventListener('click', ()=>{
+    const open = navLinks.style.display === 'flex';
+    navLinks.style.display = open ? 'none' : 'flex';
+    navLinks.style.cssText += open ? '' : 'position:absolute;top:64px;left:20px;right:20px;background:#FBF3E3;flex-direction:column;gap:18px;padding:24px;border-radius:18px;box-shadow:0 20px 40px rgba(0,0,0,.12);';
+  });
+</script>
+</body>
+</html>
