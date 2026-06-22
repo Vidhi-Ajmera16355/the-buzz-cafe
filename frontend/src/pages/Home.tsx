@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Coffee, Star } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import theBuzzCafe2 from "../images/theBuzzCafe2.webp";
 import theBuzzCafe3 from "../images/theBuzzCafe3.webp";
